@@ -1,0 +1,193 @@
+<!-- filepath: /d:/Javascrips & Jquery/doan/admin.html -->
+<!DOCTYPE html>
+<html lang="vi">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Admin Owen</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" />
+  <link rel="stylesheet" href="css/admin.css" />
+  <link rel="icon" href="assets/images/logo_owen_file_icon.webp" />
+</head>
+
+<body>
+  <div class="d-flex" id="wrapper">
+    <div class="bg-dark text-white p-3" id="sidebar">
+      <ul class="nav flex-column" style="position: fixed;">
+        <h2 class="">Admin</h2>
+        <li class="nav-item">
+          <a href="#" class="nav-link text-white">Home</a>
+        </li>
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle text-white" href="#" id="pagesDropdown" role="button"
+            data-bs-toggle="dropdown" aria-expanded="false">
+            Trang
+          </a>
+          <ul class="dropdown-menu p-0 bg-dark position-relative" aria-labelledby="pagesDropdown">
+            <li><a class="dropdown-item text-white" href="#">Trang Áo</a></li>
+            <li><a class="dropdown-item text-white" href="#">Trang Quần</a></li>
+          </ul>
+        </li>
+        <li class="nav-item">
+          <a href="#" class="nav-link text-white">Đơn hàng</a>
+        </li>
+        <li class="nav-item">
+          <a href="#" class="nav-link text-white">Khách hàng</a>
+        </li>
+        <li class="nav-item">
+          <a href="#" class="nav-link text-white">Cài đặt</a>
+        </li>
+      </ul>
+    </div>
+
+    <!-- Main content -->
+    <div class="container-fluid p-4 d-none" id="content-1">
+      <h2>Thống kê</h2>
+      <div class="row">
+        <div class="col-md-4">
+          <div class="card text-white bg-primary">
+            <div class="card-body">
+              <h5 class="card-title">Doanh thu</h5>
+              <p class="card-text">10,000,000 VNĐ</p>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="card text-white bg-success">
+            <div class="card-body">
+              <h5 class="card-title">Số đơn hàng</h5>
+              <p class="card-text">150 đơn</p>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="card text-white bg-warning">
+            <div class="card-body">
+              <h5 class="card-title">Khách hàng</h5>
+              <p class="card-text">200 người</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <h2 class="mt-4">Danh sách sản phẩm</h2>
+      <button id="openAddProductModal" class="btn btn-primary mb-3" style="float: inline-end;" data-bs-toggle="modal"
+        data-bs-target="#addProductModal">Thêm sản phẩm</button>
+      <table class="table table-bordered">
+        <thead class="table-dark">
+          <tr>
+            <th>ID</th>
+            <th>Tên sản phẩm</th>
+            <th>Giá</th>
+            <th>Số lượng</th>
+            <th>Hình ảnh</th>
+            <th>Hành động</th>
+          </tr>
+        </thead>
+        <tbody id="product-list">
+          <!-- Dữ liệu sẽ được thêm bằng JS -->
+        </tbody>
+      </table>
+
+      <!-- Modal thêm sản phẩm -->
+      <div class="modal fade" id="addProductModal" tabindex="-1" aria-labelledby="addProductModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="addProductModalLabel">Thêm sản phẩm</h5>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+              <form id="addProductForm">
+                <div class="mb-3">
+                  <label for="productName" class="form-label">Tên sản phẩm</label>
+                  <input type="text" class="form-control" id="productName" required>
+                </div>
+                <div class="mb-3">
+                  <label for="productPrice" class="form-label">Giá</label>
+                  <input type="text" class="form-control" id="productPrice" required>
+                </div>
+                <div class="mb-3">
+                  <label for="productImage" class="form-label">Hình ảnh</label>
+                  <input type="file" class="form-control" id="productImage">
+                  <img id="previewImage" src="" alt="Xem trước ảnh"
+                    style="max-width: 100px; display: none; margin-top: 10px;">
+                </div>
+                <div class="mb-3">
+                  <label for="productQuantity" class="form-label">Số lượng</label>
+                  <input type="number" class="form-control" id="productQuantity" required>
+                </div>
+                <button type="submit" class="btn btn-primary" style="float: inline-end;">Thêm</button>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="container-fluid p-4" id="content-2">
+      <h2 class="mt-4">Danh sách sản phẩm <strong>Trang Áo</strong></h2>
+      <button id="openAddProductModal" class="btn btn-primary mb-3" style="float: inline-end;" data-bs-toggle="modal"
+        data-bs-target="#addProductModal">Thêm sản phẩm</button>
+      <table class="table table-bordered">
+        <thead class="table-dark">
+          <tr>
+            <th>ID</th>
+            <th>Tên sản phẩm</th>
+            <th>Giá</th>
+            <th>Số lượng</th>
+            <th>Hình ảnh</th>
+            <th>Hành động</th>
+          </tr>
+        </thead>
+        <tbody id="product-list">
+          <!-- Dữ liệu sẽ được thêm bằng JS -->
+        </tbody>
+      </table>
+
+      <!-- Modal thêm sản phẩm -->
+      <div class="modal fade" id="addProductModal" tabindex="-1" aria-labelledby="addProductModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="addProductModalLabel">Thêm sản phẩm</h5>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+              <form id="addProductForm">
+                <div class="mb-3">
+                  <label for="productName" class="form-label">Tên sản phẩm</label>
+                  <input type="text" class="form-control" id="productName" required>
+                </div>
+                <div class="mb-3">
+                  <label for="productPrice" class="form-label">Giá</label>
+                  <input type="text" class="form-control" id="productPrice" required>
+                </div>
+                <div class="mb-3">
+                  <label for="productImage" class="form-label">Hình ảnh</label>
+                  <input type="file" class="form-control" id="productImage">
+                  <img id="previewImage" src="" alt="Xem trước ảnh"
+                    style="max-width: 100px; display: none; margin-top: 10px;">
+                </div>
+                <div class="mb-3">
+                  <label for="productQuantity" class="form-label">Số lượng</label>
+                  <input type="number" class="form-control" id="productQuantity" required>
+                </div>
+                <button type="submit" class="btn btn-primary" style="float: inline-end;">Thêm</button>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="js/admin.js"></script>
+</body>
+
+</html>
