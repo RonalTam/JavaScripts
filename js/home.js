@@ -9,11 +9,11 @@ document.addEventListener('DOMContentLoaded', function () {
       let productHTML = `
               <div class="col-lg-3 col-6 mb-4">
                   <div class="card" style="width: 100%">
-                      <a href="ao_so_mi_3.html">
+                      <a href="${product.href}">
                           <img src="${product.image}" class="card-img-top" style="border-radius: 5%" alt="${product.name}" />
                       </a>
                       <div class="card-body">
-                          <a href="ao_so_mi_3.html" class="btn btn-secondary mb-2">MUA NGAY</a>
+                          <a href="${product.href}" class="btn btn-secondary mb-2">MUA NGAY</a>
                           <p class="card-text text-secondary" style="white-space: nowrap">${product.name}</p>
                           <span>${product.price} ₫</span>
                       </div>
@@ -24,7 +24,6 @@ document.addEventListener('DOMContentLoaded', function () {
     });
 
     // Khởi tạo Slick Slider sau khi sản phẩm được render
-
     $(document).ready(function () {
       $('.products-slider').slick({
         slidesToShow: 4,

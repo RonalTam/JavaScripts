@@ -1,6 +1,31 @@
+let products = JSON.parse(localStorage.getItem('productsAo')) || [];
+function renderProducts() {
+    let productsContainer = document.getElementById('product-list');
+    productsContainer.innerHTML = '';
+
+    products.forEach(product => {
+        let productHTML = `
+                <div class="col-6 col-sm-6 col-md-4 mb-4">
+                    <div class="card" style="width: 100%">
+                        <a href="ao_so_mi.html">
+                        <img src="${product.image}" class="card-img-top" style="border-radius: 3%" alt="${product.name}" />
+                        </a>
+                        <div class="card-body">
+                            <a href="ao_so_mi.html" class="btn btn-secondary">MUA NGAY</a>
+                            <p class="card-text text-secondary">${product.name}</p>
+                            <span>${product.price} ₫</span>
+                        </div>
+                    </div>
+                </div>
+            `;
+        productsContainer.innerHTML += productHTML;
+    });
+}
+
+
 let currentPage = 1;
 const productsPerPage = 12;
-const totalProducts = 48; // Tổng số sản phẩm
+const totalProducts = 24; // Tổng số sản phẩm
 
 function displayProducts(page) {
     const productList = document.getElementById('product-list');
@@ -37,4 +62,9 @@ function prevPage() {
 }
 
 // Khởi tạo lần đầu
+renderProducts();
 displayProducts(currentPage);
+
+
+
+

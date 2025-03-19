@@ -34,6 +34,7 @@ body {
     transform: translateY(30px);
     transition: all 0.3s ease;
     visibility: hidden;
+    border-bottom: 1px solid #c9ae63;
 }
 
 .menu:hover .dropdown-menu {
@@ -165,7 +166,7 @@ body {
 }
 
 #cart-btn {
-    font-size: 21px;
+    font-size: 19px;
     background-color: #007bff;
     color: white;
     border: none;

@@ -50,7 +50,7 @@ document.addEventListener('DOMContentLoaded', function() {
             const password = document.getElementById('password').value;
 
             if (checkLogin(username, password)) {
-                alert('Đăng nhập thành công!');
+                // alert('Đăng nhập thành công!');
                 window.location.href = 'home.html'; // Đổi thành trang đích sau khi đăng nhập
             } else {
                 alert('Tên đăng nhập hoặc mật khẩu không đúng!');
