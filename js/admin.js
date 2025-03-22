@@ -49,7 +49,7 @@ document.addEventListener("DOMContentLoaded", function () {
                 <td>${product.price} VNĐ</td>
                 <td>${product.quantity}</td>
                 <td><img src="${product.image}" width="50"></td>
-                <td style="display:flex; gap: 5px;">
+                <td class="d-flex" style="justify-content: space-evenly;">
                     <button class="btn btn-warning btn-sm" onclick="editProduct(${index}, '${page}')">Sửa</button>
                     <button class="btn btn-danger btn-sm" onclick="deleteProduct(${index}, '${page}')">Xóa</button>
                 </td>
@@ -187,7 +187,7 @@ document.addEventListener("DOMContentLoaded", function () {
             reader.readAsDataURL(file);
         }
     });
-
+    loadAccounts();
     renderProducts();
 });
 
@@ -208,4 +208,32 @@ function showContent(id) {
     const contents = document.querySelectorAll('.container-fluid.p-4');
     contents.forEach(content => content.classList.add('d-none'));
     document.getElementById(id).classList.remove('d-none');
+}
+
+// trang tai khoan
+function loadAccounts() {
+    const accounts = JSON.parse(localStorage.getItem('accounts')) || [];
+    const table = document.getElementById('account-list');
+    table.innerHTML = '';
+    accounts.forEach((account, index) => {
+        table.innerHTML += `
+            <tr>
+                <td>${account.username}</td>
+                <td>${account.email}</td>
+                <td>${account.password}</td>
+                <td class="d-flex" style="justify-content: space-evenly;">
+                    <button class="btn btn-danger btn-sm" onclick="deleteAccount(${index})">Xóa</button>
+                </td>
+            </tr>
+        `;
+    });
+}
+
+function deleteAccount(index) {
+    if (confirm('Bạn có chắc muốn xóa tài khoản này?')) {
+        const accounts = JSON.parse(localStorage.getItem('accounts')) || [];
+        accounts.splice(index, 1);
+        localStorage.setItem('accounts', JSON.stringify(accounts));
+        loadAccounts();
+    }
 }

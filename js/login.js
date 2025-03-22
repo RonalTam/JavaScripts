@@ -1,6 +1,8 @@
 document.addEventListener('DOMContentLoaded', function() {
     const formLogin = document.getElementById('formLogin');
     const formRegister = document.getElementById('formRegister');
+    const dropdownAccount = document.querySelector('.dropdown-account .account-item');
+    console.log("Dropdown account element:", dropdownAccount);
 
     // Hàm lưu tài khoản vào LocalStorage
     function saveAccount(username, email, password) {
@@ -29,7 +31,7 @@ document.addEventListener('DOMContentLoaded', function() {
             const email = document.getElementById('reg-email').value;
             const password = document.getElementById('reg-password').value;
             const confirmPassword = document.getElementById('reg-confirm-password').value;
-    
+
             if (isAccountExist(username, email)) {
                 alert('Tên đăng nhập hoặc email đã tồn tại!');
             } else if (password === confirmPassword) {
@@ -49,12 +51,44 @@ document.addEventListener('DOMContentLoaded', function() {
             const username = document.getElementById('username').value;
             const password = document.getElementById('password').value;
 
-            if (checkLogin(username, password)) {
-                // alert('Đăng nhập thành công!');
-                window.location.href = 'home.html'; // Đổi thành trang đích sau khi đăng nhập
+            if (username === 'admin' && password === 'admin') {
+                alert('Đăng nhập thành công trang admin!');
+                localStorage.setItem('isLoggedIn', 'true');
+                localStorage.setItem('username', username);
+                window.location.href = 'admin.html';
+            } else if (checkLogin(username, password)) {
+                localStorage.setItem('isLoggedIn', 'true');
+                localStorage.setItem('username', username);
+                window.location.href = 'home.html'; 
             } else {
                 alert('Tên đăng nhập hoặc mật khẩu không đúng!');
             }
         });
+    }
+
+    // Xử lý UI "Xin chào + Đăng xuất"
+    if (dropdownAccount) {
+        if (localStorage.getItem('isLoggedIn') === 'true') {
+            const username = localStorage.getItem('username');
+
+            dropdownAccount.innerHTML = `
+                <li class="list-group-item p-0">
+                    <a class="p-3 w-100 d-flex">Xin chào: ${username}</a>
+                </li>
+                <li class="list-group-item p-0">
+                    <a href="#" id="logout-btn" class="p-3 w-100 d-flex">Đăng xuất</a>
+                </li>
+            `;
+
+            const logoutBtn = document.getElementById('logout-btn');
+            logoutBtn.addEventListener('click', function(e) {
+                e.preventDefault();
+                localStorage.removeItem('isLoggedIn');
+                localStorage.removeItem('username');
+                window.location.reload();
+            });
+        } else {
+            console.log("Chưa đăng nhập, giữ nguyên Đăng nhập/Tạo tài khoản");
+        }
     }
 });

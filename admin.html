@@ -30,10 +30,10 @@
           </ul>
         </li>
         <li class="nav-item">
-          <a href="#" class="nav-link text-white">Đơn hàng</a>
+          <a href="#" class="nav-link text-white" data-target="content-3">Tài khoản</a>
         </li>
         <li class="nav-item">
-          <a href="#" class="nav-link text-white">Khách hàng</a>
+          <a href="#" class="nav-link text-white">Đơn hàng</a>
         </li>
         <li class="nav-item">
           <a href="#" class="nav-link text-white">Cài đặt</a>
@@ -107,6 +107,25 @@
           </tr>
         </thead>
         <tbody id="product-list-ao">
+          <!-- Dữ liệu sẽ được thêm bằng JS -->
+        </tbody>
+      </table>
+    </div>
+
+    <!-- Trang Tai Khoan  -->
+    <div class="container-fluid p-4 d-none" id="content-3">
+      <h2 class="mt-4">Danh sách tài khoản người dùng</h2>
+
+      <table class="table table-bordered">
+        <thead class="table-dark">
+          <tr>
+            <th>UserName</th>
+            <th>Password</th>
+            <th>Email</th>
+            <th>Hành động</th>
+          </tr>
+        </thead>
+        <tbody id="account-list">
           <!-- Dữ liệu sẽ được thêm bằng JS -->
         </tbody>
       </table>

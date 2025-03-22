@@ -244,7 +244,7 @@
               <i class="bi bi-person"></i>
             </a>
             <div class="dropdown-account">
-              <ul class="account-item list-group">
+              <ul class="account-item list-group" id="account-item">
                 <li class="list-group-item p-0">
                   <a href="login.html" class="p-3 w-100 d-flex">Đăng nhập</a>
                 </li>
@@ -252,6 +252,10 @@
                   <a href="signup.html" class="p-3 w-100 d-flex">Tạo tài khoản</a>
                 </li>
               </ul>
+              <div id="logout-section" style="display: none;">
+                <span id="greeting" class="p-3 d-block">Xin chào, <b></b></span>
+                <a href="#" id="logout-btn" class="p-3 w-100 d-flex">Đăng xuất</a>
+              </div>
             </div>
           </div>
         </div>
@@ -269,12 +273,12 @@
           </div>
         </div>
         <div class="cart ms-3">
-            <a href="cart.html">
-                <button type="button" id="cart-btn" class="border-0 bg-transparent" data-bs-toggle="modal"
-                    data-bs-target="#exampleModal">
-                    <span><i class="bi bi-bag"></i></span>
-                </button>
-            </a>
+          <a href="cart.html">
+            <button type="button" id="cart-btn" class="border-0 bg-transparent" data-bs-toggle="modal"
+              data-bs-target="#exampleModal">
+              <span><i class="bi bi-bag"></i></span>
+            </button>
+          </a>
         </div>
       </div>
     </nav>
@@ -309,8 +313,10 @@
               </div>
               <div class="col-md-2">
                 <img src="assets/images/2_133.webp" class="img-fluid img-sm" alt="" onclick="changeMainImage(this)">
-                <img src="assets/images/jk241493._1.jpg" class="img-fluid img-sm my-2" alt="" onclick="changeMainImage(this)">
-                <img src="assets/images/jk241493._2.jpg" class="img-fluid img-sm" alt="" onclick="changeMainImage(this)">
+                <img src="assets/images/jk241493._1.jpg" class="img-fluid img-sm my-2" alt=""
+                  onclick="changeMainImage(this)">
+                <img src="assets/images/jk241493._2.jpg" class="img-fluid img-sm" alt=""
+                  onclick="changeMainImage(this)">
               </div>
             </div>
           </div>
@@ -339,28 +345,29 @@
           </div>
           <div class="col-md-5">
             <p><strong>Áo khoác - JK241493</strong></p>
-            <p>Mã SP: 
-                JK241493</p>
+            <p>Mã SP:
+              JK241493</p>
             <p><strong>690.000 ₫</strong></p>
             <p><strong class="mt-4">Màu sắc:</strong></p>
-            <div class="d-inline-block mb-4" style="width: 30px; height: 30px; border-radius: 20%; background: #5673b3;"></div>
+            <div class="d-inline-block mb-4"
+              style="width: 30px; height: 30px; border-radius: 20%; background: #5673b3;"></div>
             <div class="chose-size">
               <p><strong>Kích cỡ:</strong></p>
-              <div class="d-flex" role="group" aria-label="Kích cỡ sản phẩm">
-                <input type="radio" class="btn-check" name="size" id="sizeS" autocomplete="off">
+              <div class="d-flex gap-1 flex-wrap" role="group" aria-label="Kích cỡ sản phẩm">
+                <input type="radio" class="btn-check" name="size" id="sizeS" value="S" autocomplete="off" required>
                 <label class="btn btn-outline-dark" for="sizeS">S</label>
 
-                <input type="radio" class="btn-check" name="size" id="sizeM" autocomplete="off">
+                <input type="radio" class="btn-check" name="size" id="sizeM" value="M" autocomplete="off">
                 <label class="btn btn-outline-dark" for="sizeM">M</label>
 
-                <input type="radio" class="btn-check" name="size" id="sizeL" autocomplete="off">
+                <input type="radio" class="btn-check" name="size" id="sizeL" value="L" autocomplete="off">
                 <label class="btn btn-outline-dark" for="sizeL">L</label>
 
-                <input type="radio" class="btn-check" name="size" id="sizeXL" autocomplete="off">
+                <input type="radio" class="btn-check" name="size" id="sizeXL" value="XL" autocomplete="off">
                 <label class="btn btn-outline-dark" for="sizeXL">XL</label>
 
-                <input type="radio" class="btn-check" name="size" id="size2XL" autocomplete="off">
-                <label class="btn btn-outline-dark" for="size2XL"><span>2XL</span></label>
+                <input type="radio" class="btn-check" name="size" id="size2XL" value="2XL" autocomplete="off">
+                <label class="btn btn-outline-dark" for="size2XL">2XL</label>
               </div>
             </div>
             <div class="size-guide my-3">
@@ -389,10 +396,10 @@
             <div class="banner">
               <img src="assets/images/Artboard_23_1.webp" class="img-fluid" alt="">
             </div>
-            
+
             <div class="product-btn">
               <a href="#" class="d-grid gap-2 my-4 text-decoration-none">
-                <button class="btn " type="button" onclick="addToCart(3, 'Áo khoác - JK241493', 1350000 , 'assets/images/2_133.webp')">THÊM VÀO GIỎ HÀNG</button>
+                <button class="btn " type="button" onclick="getSizeAddToCart()">THÊM VÀO GIỎ HÀNG</button>
               </a>
             </div>
             <br>
