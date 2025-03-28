@@ -1,70 +1,63 @@
 let products = JSON.parse(localStorage.getItem('productsAo')) || [];
-function renderProducts() {
-    let productsContainer = document.getElementById('product-list');
-    productsContainer.innerHTML = '';
-
-    products.forEach(product => {
-        let productHTML = `
-                <div class="col-6 col-sm-6 col-md-4 mb-4">
-                    <div class="card" style="width: 100%">
-                        <a href="ao_so_mi.html">
-                        <img src="${product.image}" class="card-img-top" style="border-radius: 3%" alt="${product.name}" />
-                        </a>
-                        <div class="card-body">
-                            <a href="ao_so_mi.html" class="btn btn-secondary">MUA NGAY</a>
-                            <p class="card-text text-secondary">${product.name}</p>
-                            <span>${product.price} ₫</span>
-                        </div>
-                    </div>
-                </div>
-            `;
-        productsContainer.innerHTML += productHTML;
-    });
-}
-
-
 let currentPage = 1;
 const productsPerPage = 12;
-const totalProducts = 24; // Tổng số sản phẩm
+
+function renderProducts() {
+    let productsContainer = document.getElementById('product-list');
+    if (!productsContainer) return;
+
+    productsContainer.innerHTML = products
+        .map((product, index) => `
+            <div class="col-6 col-sm-6 col-md-4 mb-4 product-item" data-index="${index}">
+                <div class="card" style="width: 100%">
+                    <a href="chi_tiet_san_pham.html" class="product-link" data-index="${index}">
+                        <img src="${product.image}" class="card-img-top" style="border-radius: 3%" alt="${product.name}" />
+                    </a>
+                    <div class="card-body">
+                        <a href="chi_tiet_san_pham.html" class="btn btn-secondary product-link" data-index="${index}">MUA NGAY</a>
+                        <p class="card-text text-secondary">${product.name}</p>
+                        <span>${product.price} ₫</span>
+                    </div>
+                </div>
+            </div>
+        `).join("");
+
+    displayProducts(currentPage);
+}
+
+// Lắng nghe sự kiện click trên container (Event Delegation)
+document.getElementById("product-list").addEventListener("click", function (e) {
+    let link = e.target.closest(".product-link");
+    if (!link) return;
+
+    e.preventDefault();
+    const productIndex = link.getAttribute("data-index");
+    localStorage.setItem("selectedProduct", JSON.stringify(products[productIndex]));
+    window.location.href = "chi_tiet_san_pham.html";
+});
 
 function displayProducts(page) {
-    const productList = document.getElementById('product-list');
     const start = (page - 1) * productsPerPage;
     const end = start + productsPerPage;
-    const allProducts = Array.from(productList.children);
-
-    allProducts.forEach((product, index) => {
-        if (index >= start && index < end) {
-            product.style.display = 'block';
-        } else {
-            product.style.display = 'none';
-        }
+    
+    document.querySelectorAll(".product-item").forEach((product, index) => {
+        product.style.display = (index >= start && index < end) ? "block" : "none";
     });
 }
 
 function changePage(page) {
+    if (page < 1 || page > Math.ceil(products.length / productsPerPage)) return;
     currentPage = page;
     displayProducts(currentPage);
 }
 
 function nextPage() {
-    if (currentPage < totalProducts / productsPerPage) {
-        currentPage++;
-        displayProducts(currentPage);
-    }
+    changePage(currentPage + 1);
 }
 
 function prevPage() {
-    if (currentPage > 1) {
-        currentPage--;
-        displayProducts(currentPage);
-    }
+    changePage(currentPage - 1);
 }
 
-// Khởi tạo lần đầu
+// Khởi tạo trang
 renderProducts();
-displayProducts(currentPage);
-
-
-
-

@@ -1,36 +1,48 @@
+document.addEventListener("DOMContentLoaded", function () {
+  let product = JSON.parse(localStorage.getItem("selectedProduct"));
+  if (!product || !product.image) {
+      console.error("Sản phẩm không tồn tại hoặc dữ liệu không hợp lệ!");
+      return;
+  }
+
+  document.querySelector(".mainImg").src = product.image;
+  document.querySelector(".mainImg-1").src = product.image;
+  document.querySelector(".productName").textContent = product.name;
+  document.querySelector(".productCode").textContent = `Mã: ${product.id || "N/A"}`;
+  document.getElementById("productPrice").innerHTML = `<strong>Giá tiền: ${product.price} VND</strong>`;
+
+  document.querySelectorAll(".productName strong").forEach(p => {
+      p.textContent = "Sản phẩm: " + product.name;
+  });
+});
+
 function changeMainImage(thumbnail) {
-    // Lấy phần tử ảnh chính
-    const mainImg = document.getElementById('mainImg');
-    
-    // Đặt thuộc tính src của ảnh chính bằng src của ảnh nhỏ được nhấp
-    mainImg.src = thumbnail.src;
+  document.querySelector(".mainImg").src = thumbnail.src;
 }
 
 function getSizeAddToCart() {
-  // Lấy size người dùng chọn
-  const selectedSize = document.querySelector('input[name="size"]:checked');
+  let selectedSize = document.querySelector('input[name="size"]:checked');
   if (!selectedSize) {
-    alert('Vui lòng chọn size trước khi thêm vào giỏ hàng.');
-    return;
+      alert("Vui lòng chọn kích cỡ!");
+      return;
   }
-  const size = selectedSize.value;
 
-  addToCart(1, 'Áo khoác - 1JK241493', 690000, 'assets/images/2_133.webp', size);
-}
+  let product = JSON.parse(localStorage.getItem("selectedProduct"));  
+  if (!product) {
+      alert("Không tìm thấy sản phẩm! Vui lòng thử lại.");
+      return;
+  }
 
-function addToCart(id, name, price, image, size) {
-    console.log(image);
-    const product = { id, name, price, quantity: 1, image , size};
-    let cart = JSON.parse(localStorage.getItem('cart')) || [];
+  let cart = JSON.parse(localStorage.getItem("cart")) || []; // Nếu null, gán []
 
-    const existingProductIndex = cart.findIndex(item => item.id === id && item.size === size);
+  const existingProduct = cart.find(item => item.id === product.id && item.size === selectedSize.value);
 
-    if (existingProductIndex !== -1) {
-      cart[existingProductIndex].quantity += 1;
-    } else {
-      cart.push(product);
-    }
+  if (existingProduct) {
+      existingProduct.quantity += 1;
+  } else {
+      cart.push({ id: product.id, name: product.name, price: product.price, quantity: 1, size: selectedSize.value, image: product.image });
+  }
 
-    localStorage.setItem('cart', JSON.stringify(cart));
-    alert(name + " Size " + (size) + ' đã được thêm vào giỏ hàng!');
+  localStorage.setItem("cart", JSON.stringify(cart)); // Lưu lại giỏ hàng
+  alert(`${product.name} (Size: ${selectedSize.value}) đã được thêm vào giỏ hàng!`);
 }

@@ -74,8 +74,3 @@ document.addEventListener("DOMContentLoaded", function () {
     renderCart();
 });
 
-document.getElementById('btn-order').addEventListener('click', function () {
-    localStorage.removeItem('cart');
-    alert('Đặt hàng thành công. Đơn hàng của bạn đang được xử lý.');
-    window.location.href = 'home.html';
-});

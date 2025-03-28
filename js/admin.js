@@ -93,9 +93,7 @@ document.addEventListener("DOMContentLoaded", function () {
         reader.onload = function (e) {
             let href = "";
             if (currentPage === 'home') {
-                href = `ao_so_mi_${products.length + 1}.html`;
-            } else if (currentPage === 'ao') {
-                href = `ao_so_mi_3.html`;
+                href = `ao_so_mi_${products.index + 1}.html`;
             }
 
             const newProduct = { name, price, quantity, image: e.target.result, href };
